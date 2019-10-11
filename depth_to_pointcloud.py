@@ -73,7 +73,7 @@ opt = parser.parse_args()
 # read all the file names
 names = sorted([name.split('.')[0] for name in os.listdir(opt.depth) if name.split('.')[1] in img_ext])
 
-for name in tqdm(names):
+for name in tqdm(names, desc='Generating Point Cloud'):
     depth_path = os.path.join(opt.depth, '{}.png'.format(name))
     calib_path = os.path.join(opt.calib, '{}.txt'.format(name))
     pc_path = os.path.join(opt.pc, '{}.xyz'.format(name))
