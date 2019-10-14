@@ -47,12 +47,12 @@ def create_point_cloud(depth_path, fov_x, fov_y, ratio=50/65535.):
 
     for i, j in itertools.product(range(H), range(W)):
         alpha = (pi - fov_x) / 2
-        gamma = alpha + fov_x * float(j / W)
+        gamma = alpha + fov_x * float((W - j) / W)
         delta_x = img[i, j] / tan(gamma)
 
-        alpha = 2 * pi - fov_y / 2
-        gamma = alpha + fov_y * float(i / H)
-        delta_y = img[i, j] * tan(gamma)
+        alpha = (pi - fov_y) / 2
+        gamma = alpha + fov_y * float((H - i) / H)
+        delta_y = img[i, j] / tan(gamma)
 
         point_cloud.append([delta_x, delta_y, float(img[i, j])])
 
