@@ -50,8 +50,11 @@ for world in tqdm(worlds, desc='Generating Normal Map'):
     for subset in tqdm(subsets, desc='world {}'.format(world)):
         sub_dir = os.path.join(world_dir, subset)
         files = sorted(os.listdir(sub_dir))
-        for file in tqdm(files):
+        for file in tqdm(files, desc='subset {}'.format(subset)):
             depth_path = os.path.join(sub_dir, file)
+
+            if os.path.exists(depth_path.replace('depthgt', 'normal_map')):
+                continue
 
             # set camera intrinsics and image size
             H, W = 375, 1242
