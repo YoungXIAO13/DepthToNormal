@@ -68,7 +68,7 @@ for world in tqdm(worlds, desc='Generating Normal Map'):
             depth_path_point = depth_path.replace('depthgt', 'depth_point')
             if not os.path.exists(os.path.dirname(depth_path_point)):
                 os.makedirs(os.path.dirname(depth_path_point))
-            cv2.imwrite(depth_path_point, point_depth)
+            cv2.imwrite(depth_path_point, point_depth.astype('uint16'))
 
             # create the normal map and save it in .xyz
             normal_xyz_path = depth_path.replace('depthgt', 'normal_xyz')
