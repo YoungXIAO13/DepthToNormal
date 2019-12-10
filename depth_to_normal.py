@@ -93,7 +93,7 @@ if opt.dataset == 'KITTI':
                 if not os.path.exists(os.path.dirname(normal_img_path)):
                     os.makedirs(os.path.dirname(normal_img_path))
                 xyz_normal = np.loadtxt(normal_xyz_path)
-                normal = xyz_normal[:, 3:].reshape(H, W, 3)
+                normal = xyz_normal[:, 3:].reshape(H, W, 3)[:, :, ::-1]
                 normal_uint = ((2 ** 16 - 1) * (normal + 1) / 2).astype('uint16')
                 cv2.imwrite(normal_img_path, normal_uint)
 
@@ -135,7 +135,7 @@ elif opt.dataset == 'NYU':
         # read in .xyz and transform it to .png of uint-16
         normal_img_path = os.path.join(normal_dir, '{:04d}.png'.format(i))
         xyz_normal = np.loadtxt(normal_xyz_path)
-        normal = xyz_normal[:, 3:].reshape(H, W, 3)
+        normal = xyz_normal[:, 3:].reshape(H, W, 3)[:, :, ::-1]
         normal_uint = ((2 ** 16 - 1) * (normal + 1) / 2).astype('uint16')
         cv2.imwrite(normal_img_path, normal_uint)
 
